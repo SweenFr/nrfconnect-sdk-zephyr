@@ -126,6 +126,9 @@ static int line_out(uint8_t *data, size_t length, void *output_ctx)
 		notify_len = LOG_BACKEND_BLE_BUF_SIZE;
 	}
 
+	if (length < notify_len)
+		notify_len = (uint16_t)length;
+
 	struct bt_gatt_notify_params notify_param = {
 		.uuid = NULL,
 		.attr = log_characteristic,
